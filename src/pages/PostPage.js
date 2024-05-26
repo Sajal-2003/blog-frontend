@@ -1,8 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { formatISO9075 } from "date-fns";
 import { Link } from "react-router-dom";
-import { UserContext } from "../context/userContext";
 
 const PostPage = () => {
   const user_id = localStorage.getItem("id");
@@ -16,7 +15,7 @@ const PostPage = () => {
         });
       }
     );
-  }, []);
+  });
 
   if (!postInfo) return "";
 

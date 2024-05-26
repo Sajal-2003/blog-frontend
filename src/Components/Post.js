@@ -19,7 +19,9 @@ const Post = ({ _id, title, summary, cover, content, author, createdAt }) => {
           <h2>{title}</h2>
         </Link>
         <p className="info">
-          <p className="author">{author.username}</p>
+          <a href="/" className="author">
+            {author.username}
+          </a>
           <time>{formatISO9075(new Date(createdAt))}</time>
         </p>
         <p className="summary">{summary}</p>

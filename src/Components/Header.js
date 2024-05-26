@@ -9,14 +9,11 @@ const Header = () => {
 
   async function profile() {
     try {
-      let response = await fetch(
-        "https://blog-backend-qlco.onrender.com/api/auth/profile",
-        {
-          method: "GET",
-          credentials: "include",
-        }
-      );
-      response = await response.json();
+      await fetch("https://blog-backend-qlco.onrender.com/api/auth/profile", {
+        method: "GET",
+        credentials: "include",
+      });
+      //   response = await response.json();
       setUserInfo(userInfo);
     } catch (error) {
       message.error("Internal Server Error");
@@ -25,7 +22,7 @@ const Header = () => {
 
   useEffect(() => {
     profile();
-  }, []);
+  });
 
   const token = localStorage.getItem("token");
 

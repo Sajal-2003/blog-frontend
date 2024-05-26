@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { message } from "antd";
 import { UserContext } from "../context/userContext";
-import { axios } from "axios";
+import axios from "axios";
 
 const Login = () => {
   const [username, setUsername] = useState("");

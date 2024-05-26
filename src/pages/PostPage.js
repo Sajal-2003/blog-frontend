@@ -7,7 +7,6 @@ import { UserContext } from "../context/userContext";
 const PostPage = () => {
   const user_id = localStorage.getItem("id");
   const [postInfo, setPostInfo] = useState(null);
-  const { userInfo } = useContext(UserContext);
   const { id } = useParams();
   useEffect(() => {
     fetch(`https://blog-backend-qlco.onrender.com/api/auth/post/${id}`).then(

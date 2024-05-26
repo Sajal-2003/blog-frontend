@@ -12,20 +12,13 @@ const Login = () => {
   async function handleLogin(e) {
     try {
       e.preventDefault();
-      let response = await fetch(
+      const response = await axios.post(
         "https://blog-backend-qlco.onrender.com/api/auth/login",
-        {
-          method: "POST",
-          body: JSON.stringify({ username, password }),
-          headers: { "Content-Type": "application/json" },
-          credentials: "include",
-        }
+        { username, password }
       );
-      response = await response.json();
-      console.log(response.msg);
 
-      if (response.success) {
-        message.success(response.msg);
+      if (response.request.status === 201) {
+        message.success(response.data.msg);
         localStorage.setItem("token", response.token);
         localStorage.setItem("id", response.existingUser._id);
         navigate("/");
@@ -34,10 +27,9 @@ const Login = () => {
         message.error(response.msg);
       }
     } catch (err) {
-      message.error(err.msg);
+      message.error(error.response.data.msg);
     }
   }
-
   return (
     <form onSubmit={handleLogin}>
       <h1 className="login">Login</h1>

@@ -18,7 +18,7 @@ const Login = () => {
         { username, password }
       );
 
-      if (response.request.status === 201) {
+      if (response.data.success === "true") {
         message.success(response.data.msg);
         localStorage.setItem("token", response.token);
         localStorage.setItem("id", response.existingUser._id);

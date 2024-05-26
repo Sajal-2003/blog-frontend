@@ -29,15 +29,11 @@ const Header = () => {
   async function handleLogout(e) {
     try {
       e.preventDefault();
-      let response = await fetch(
-        "https://blog-backend-qlco.onrender.com/api/auth/logout",
-        {
-          method: "POST",
-          credentials: "include",
-        }
+      let response = await axios.post(
+        "https://blog-backend-qlco.onrender.com/api/auth/logout"
       );
-      response = await response.json();
-      message.success(response.msg);
+
+      message.success(response.data.msg);
       setUserInfo(null);
       localStorage.removeItem("token");
       localStorage.removeItem("id");

@@ -28,7 +28,7 @@ const Login = () => {
         message.error(response.msg);
       }
     } catch (err) {
-      message.error(error.response.data.msg);
+      message.error(err.response.data.msg);
     }
   }
   return (

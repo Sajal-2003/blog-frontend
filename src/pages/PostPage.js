@@ -10,11 +10,13 @@ const PostPage = () => {
   const { userInfo } = useContext(UserContext);
   const { id } = useParams();
   useEffect(() => {
-    fetch(`http://localhost:8000/api/auth/post/${id}`).then((response) => {
-      response.json().then((postInfo) => {
-        setPostInfo(postInfo);
-      });
-    });
+    fetch(`https://blog-backend-qlco.onrender.com/api/auth/post/${id}`).then(
+      (response) => {
+        response.json().then((postInfo) => {
+          setPostInfo(postInfo);
+        });
+      }
+    );
   }, []);
 
   if (!postInfo) return "";
@@ -48,7 +50,7 @@ const PostPage = () => {
       )}
 
       <div className="image">
-        <img src={`http://localhost:8000/${postInfo.cover}`} alt="" />
+        <img src={`${postInfo.cover}`} alt="" />
       </div>
       <div
         className="content"

@@ -12,13 +12,15 @@ export default function EditPost() {
   const [files, setFiles] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/auth/post/" + id).then((response) => {
-      response.json().then((postInfo) => {
-        setTitle(postInfo.title);
-        setContent(postInfo.content);
-        setSummary(postInfo.summary);
-      });
-    });
+    fetch("https://blog-backend-qlco.onrender.com/api/auth/post/" + id).then(
+      (response) => {
+        response.json().then((postInfo) => {
+          setTitle(postInfo.title);
+          setContent(postInfo.content);
+          setSummary(postInfo.summary);
+        });
+      }
+    );
   }, [id]);
 
   async function updatePost(ev) {
@@ -31,11 +33,14 @@ export default function EditPost() {
     if (files?.[0]) {
       data.set("file", files?.[0]);
     }
-    const response = await fetch("http://localhost:8000/api/auth/post", {
-      method: "PUT",
-      body: data,
-      credentials: "include",
-    });
+    const response = await fetch(
+      "https://blog-backend-qlco.onrender.com/api/auth/post",
+      {
+        method: "PUT",
+        body: data,
+        credentials: "include",
+      }
+    );
     if (response.ok) {
       message.success("Post edit Successfully");
       navigate(`/post/${id}`);

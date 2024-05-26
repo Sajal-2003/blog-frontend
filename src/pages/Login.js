@@ -12,12 +12,15 @@ const Login = () => {
   async function handleLogin(e) {
     try {
       e.preventDefault();
-      let response = await fetch("http://localhost:8000/api/auth/login", {
-        method: "POST",
-        body: JSON.stringify({ username, password }),
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-      });
+      let response = await fetch(
+        "https://blog-backend-qlco.onrender.com/api/auth/login",
+        {
+          method: "POST",
+          body: JSON.stringify({ username, password }),
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+        }
+      );
       response = await response.json();
       console.log(response.msg);
 

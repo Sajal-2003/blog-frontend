@@ -18,7 +18,7 @@ const CreatePost = () => {
     data.set("content", content);
     data.set("file", files[0]);
     e.preventDefault();
-    let response = await fetch("http://localhost:8000/api/auth/post", {
+    let response = await fetch("https://blog-backend-qlco.onrender.com/api/auth/post", {
       method: "POST",
       body: data,
       credentials: "include",

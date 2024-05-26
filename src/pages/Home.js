@@ -4,11 +4,13 @@ import Post from "../Components/Post";
 const Home = () => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:8000/api/auth/getpost").then((response) => {
-      response.json().then((posts) => {
-        setPosts(posts);
-      });
-    });
+    fetch("https://blog-backend-qlco.onrender.com/api/auth/getpost").then(
+      (response) => {
+        response.json().then((posts) => {
+          setPosts(posts);
+        });
+      }
+    );
   }, []);
   return (
     <>

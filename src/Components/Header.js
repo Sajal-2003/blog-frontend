@@ -9,10 +9,13 @@ const Header = () => {
 
   async function profile() {
     try {
-      let response = await fetch("http://localhost:8000/api/auth/profile", {
-        method: "GET",
-        credentials: "include",
-      });
+      let response = await fetch(
+        "https://blog-backend-qlco.onrender.com/api/auth/profile",
+        {
+          method: "GET",
+          credentials: "include",
+        }
+      );
       response = await response.json();
       setUserInfo(userInfo);
     } catch (error) {
@@ -29,10 +32,13 @@ const Header = () => {
   async function handleLogout(e) {
     try {
       e.preventDefault();
-      let response = await fetch("http://localhost:8000/api/auth/logout", {
-        method: "POST",
-        credentials: "include",
-      });
+      let response = await fetch(
+        "https://blog-backend-qlco.onrender.com/api/auth/logout",
+        {
+          method: "POST",
+          credentials: "include",
+        }
+      );
       response = await response.json();
       message.success(response.msg);
       setUserInfo(null);
@@ -44,7 +50,6 @@ const Header = () => {
       message.error("Internal Server Error");
     }
   }
-
 
   return (
     <header>

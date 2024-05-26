@@ -12,7 +12,7 @@ const Register = () => {
     try {
       e.preventDefault();
       const response = await axios.post(
-        "http://localhost:8000/api/auth/register",
+        "https://blog-backend-qlco.onrender.com/api/auth/register",
         { username, password }
       );
 

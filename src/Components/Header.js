@@ -11,7 +11,7 @@ const Header = () => {
   async function profile() {
     try {
       const res = await axios.get(
-        "http://blog-backend-qlco.onrender.com/api/auth/profile",
+        "https://blog-backend-qlco.onrender.com/api/auth/profile",
         {
           withCredentials: true,
         }
@@ -32,7 +32,7 @@ const Header = () => {
     try {
       e.preventDefault();
       let response = await axios.post(
-        "http://blog-backend-qlco.onrender.com/api/auth/logout",
+        "https://blog-backend-qlco.onrender.com/api/auth/logout",
         {
           withCredentials: true,
         }

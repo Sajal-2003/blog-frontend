@@ -2,32 +2,34 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { formatISO9075 } from "date-fns";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const PostPage = () => {
   const user_id = localStorage.getItem("id");
   const [postInfo, setPostInfo] = useState(null);
   const { id } = useParams();
   useEffect(() => {
-    fetch(`https://blog-backend-qlco.onrender.com/api/auth/post/${id}`).then(
-      (response) => {
-        response.json().then((postInfo) => {
-          setPostInfo(postInfo);
-        });
-      }
-    );
-  });
+    const getPost = async () => {
+      const res = await axios.get(
+        `http://blog-backend-qlco.onrender.com/api/auth/post/${id}`
+      );
+      // console.log(res);
+      setPostInfo(res);
+    };
+    getPost();
+  }, [id]);
 
   if (!postInfo) return "";
 
   return (
     <div className="post-page">
-      <h1>{postInfo.title}</h1>
-      <time>{formatISO9075(new Date(postInfo.createdAt))}</time>
-      <div className="author">by @{postInfo.author.username}</div>
+      <h1>{postInfo.data.title}</h1>
+      <time>{formatISO9075(new Date(postInfo.data.createdAt))}</time>
+      <div className="author">by @{postInfo.data.author.username}</div>
 
-      {user_id === postInfo.author._id && (
+      {user_id === postInfo.data.author._id && (
         <div className="edit-row">
-          <Link className="edit-btn" to={`/edit/${postInfo._id}`}>
+          <Link className="edit-btn" to={`/edit/${postInfo.data._id}`}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -48,11 +50,14 @@ const PostPage = () => {
       )}
 
       <div className="image">
-        <img src={`${postInfo.cover}`} alt="" />
+        <img
+          src={`http://blog-backend-qlco.onrender.com/${postInfo.data.cover}`}
+          alt=""
+        />
       </div>
       <div
         className="content"
-        dangerouslySetInnerHTML={{ __html: postInfo.content }}
+        dangerouslySetInnerHTML={{ __html: postInfo.data.content }}
       />
     </div>
   );

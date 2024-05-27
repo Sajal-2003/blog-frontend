@@ -5,17 +5,18 @@ import { UserContext } from "../context/userContext";
 import axios from "axios";
 
 const Header = () => {
-  const { setUserInfo, userInfo } = useContext(UserContext);
+  const { setUserInfo } = useContext(UserContext);
   const navigate = useNavigate();
 
   async function profile() {
     try {
-      await fetch("https://blog-backend-qlco.onrender.com/api/auth/profile", {
-        method: "GET",
-        credentials: "include",
-      });
-      //   response = await response.json();
-      setUserInfo(userInfo);
+      const res = await axios.get(
+        "http://blog-backend-qlco.onrender.com/api/auth/profile",
+        {
+          withCredentials: true,
+        }
+      );
+      setUserInfo(res.data);
     } catch (error) {
       message.error("Internal Server Error");
     }
@@ -31,7 +32,10 @@ const Header = () => {
     try {
       e.preventDefault();
       let response = await axios.post(
-        "https://blog-backend-qlco.onrender.com/api/auth/logout"
+        "http://blog-backend-qlco.onrender.com/api/auth/logout",
+        {
+          withCredentials: true,
+        }
       );
 
       message.success(response.data.msg);

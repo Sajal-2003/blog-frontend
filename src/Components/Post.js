@@ -8,7 +8,7 @@ const Post = ({ _id, title, summary, cover, content, author, createdAt }) => {
       <Link to={`/post/${_id}`}>
         <div className="image">
           <img
-            src={"https://blog-backend-qlco.onrender.com/" + cover}
+            src={"http://blog-backend-qlco.onrender.com/" + cover}
             alt="img"
           />
         </div>
@@ -20,7 +20,7 @@ const Post = ({ _id, title, summary, cover, content, author, createdAt }) => {
         </Link>
         <p className="info">
           <a href="/" className="author">
-            {author.username}
+            {author?.username}
           </a>
           <time>{formatISO9075(new Date(createdAt))}</time>
         </p>

@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Post from "../Components/Post";
+import axios from "axios";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
-    fetch("https://blog-backend-qlco.onrender.com/api/auth/getpost").then(
-      (response) => {
-        response.json().then((posts) => {
-          setPosts(posts);
-        });
-      }
-    );
+    const getHome = async () => {
+      let res = await axios.get(
+        "http://blog-backend-qlco.onrender.com/api/auth/getpost"
+      );
+      setPosts(res.data);
+    };
+    getHome();
   }, []);
   return (
     <>

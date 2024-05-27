@@ -14,14 +14,17 @@ const Login = () => {
     try {
       e.preventDefault();
       const response = await axios.post(
-        "https://blog-backend-qlco.onrender.com/api/auth/login",
-        { username, password }
+        "http://blog-backend-qlco.onrender.com/api/auth/login",
+        { username, password },
+        {
+          withCredentials: true, // Include credentials (cookies) in the request
+        }
       );
 
-      if (response.data.success === "true") {
+      if (response.request.status === 201) {
         message.success(response.data.msg);
-        localStorage.setItem("token", response.token);
-        localStorage.setItem("id", response.existingUser._id);
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("id", response.data.existingUser._id);
         navigate("/");
         setUserInfo(response.existingUser);
       } else {
@@ -29,6 +32,7 @@ const Login = () => {
       }
     } catch (err) {
       message.error(err.response.data.msg);
+      console.log(err);
     }
   }
   return (

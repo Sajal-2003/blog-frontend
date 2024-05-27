@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Editor from "../Editor";
 import { message } from "antd";
+import axios from "axios";
 
 export default function EditPost() {
   const navigate = useNavigate();
@@ -12,15 +12,16 @@ export default function EditPost() {
   const [files, setFiles] = useState("");
 
   useEffect(() => {
-    fetch("https://blog-backend-qlco.onrender.com/api/auth/post/" + id).then(
-      (response) => {
-        response.json().then((postInfo) => {
-          setTitle(postInfo.title);
-          setContent(postInfo.content);
-          setSummary(postInfo.summary);
-        });
-      }
-    );
+    const pro = async () => {
+      const res = await axios.get(
+        `http://blog-backend-qlco.onrender.com/api/auth/post/${id}`
+      );
+      console.log(res);
+      setTitle(res.data.title);
+      setContent(res.data.content);
+      setSummary(res.data.summary);
+    };
+    pro();
   }, [id]);
 
   async function updatePost(ev) {
@@ -33,15 +34,13 @@ export default function EditPost() {
     if (files?.[0]) {
       data.set("file", files?.[0]);
     }
-    const response = await fetch(
-      "https://blog-backend-qlco.onrender.com/api/auth/post",
-      {
-        method: "PUT",
-        body: data,
-        credentials: "include",
-      }
+    const response = await axios.put(
+      "http://blog-backend-qlco.onrender.com/api/auth/post",
+      data,
+      { withCredentials: true }
     );
-    if (response.ok) {
+    // console.log(response);
+    if (response.status === 200) {
       message.success("Post edit Successfully");
       navigate(`/post/${id}`);
     }
@@ -62,7 +61,12 @@ export default function EditPost() {
         onChange={(ev) => setSummary(ev.target.value)}
       />
       <input type="file" onChange={(ev) => setFiles(ev.target.files)} />
-      <Editor onChange={setContent} value={content} />
+      <input
+        type="text"
+        placeholder="Content"
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+      />
       <button style={{ marginTop: "5px" }}>Update post</button>
     </form>
   );

@@ -11,7 +11,7 @@ const PostPage = () => {
   useEffect(() => {
     const getPost = async () => {
       const res = await axios.get(
-        `https://blog-backend-qlco.onrender.com/api/auth/post/${id}`
+        `http://localhost:8000/api/auth/post/${id}`
       );
       // console.log(res);
       setPostInfo(res);
@@ -51,7 +51,7 @@ const PostPage = () => {
 
       <div className="image">
         <img
-          src={`https://blog-backend-qlco.onrender.com/${postInfo.data.cover}`}
+          src={`http://localhost:8000/${postInfo.data.cover}`}
           alt=""
         />
       </div>

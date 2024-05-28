@@ -14,7 +14,7 @@ export default function EditPost() {
   useEffect(() => {
     const pro = async () => {
       const res = await axios.get(
-        `https://blog-backend-qlco.onrender.com/api/auth/post/${id}`
+        `http://localhost:8000/api/auth/post/${id}`
       );
       console.log(res);
       setTitle(res.data.title);
@@ -35,7 +35,7 @@ export default function EditPost() {
       data.set("file", files?.[0]);
     }
     const response = await axios.put(
-      "https://blog-backend-qlco.onrender.com/api/auth/post",
+      "http://localhost:8000/api/auth/post",
       data,
       { withCredentials: true }
     );

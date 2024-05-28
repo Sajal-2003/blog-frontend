@@ -7,7 +7,7 @@ const Home = () => {
   useEffect(() => {
     const getHome = async () => {
       let res = await axios.get(
-        "https://blog-backend-qlco.onrender.com/api/auth/getpost"
+        "http://localhost:8000/api/auth/getpost"
       );
       setPosts(res.data);
     };

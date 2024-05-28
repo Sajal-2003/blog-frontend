@@ -22,7 +22,7 @@ const CreatePost = () => {
       e.preventDefault();
 
       const response = await axios.post(
-        "https://blog-backend-qlco.onrender.com/api/auth/post",
+        "http://localhost:8000/api/auth/post",
         data,
         { withCredentials: true }
       );

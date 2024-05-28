@@ -14,7 +14,7 @@ const Login = () => {
     try {
       e.preventDefault();
       const response = await axios.post(
-        "https://blog-backend-qlco.onrender.com/api/auth/login",
+        "http://localhost:8000/api/auth/login",
         { username, password },
         {
           withCredentials: true, // Include credentials (cookies) in the request

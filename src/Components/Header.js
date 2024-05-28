@@ -10,12 +10,9 @@ const Header = () => {
 
   async function profile() {
     try {
-      const res = await axios.get(
-        "http://localhost:8000/api/auth/profile",
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await axios.get("http://localhost:8000/api/auth/profile", {
+        withCredentials: true,
+      });
       setUserInfo(res.data);
     } catch (error) {
       message.error("Internal Server Error");
@@ -31,12 +28,9 @@ const Header = () => {
   async function handleLogout(e) {
     try {
       e.preventDefault();
-      let response = await axios.post(
-        "http://localhost:8000/api/auth/logout",
-        {
-          withCredentials: true,
-        }
-      );
+      let response = await axios.post("http://localhost:8000/api/auth/logout", {
+        withCredentials: true,
+      });
 
       message.success(response.data.msg);
       setUserInfo(null);

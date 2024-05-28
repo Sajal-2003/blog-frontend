@@ -6,9 +6,7 @@ const Home = () => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     const getHome = async () => {
-      let res = await axios.get(
-        "http://localhost:8000/api/auth/getpost"
-      );
+      let res = await axios.get("http://localhost:8000/api/auth/getpost");
       setPosts(res.data);
     };
     getHome();

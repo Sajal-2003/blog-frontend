@@ -10,9 +10,7 @@ const PostPage = () => {
   const { id } = useParams();
   useEffect(() => {
     const getPost = async () => {
-      const res = await axios.get(
-        `http://localhost:8000/api/auth/post/${id}`
-      );
+      const res = await axios.get(`http://localhost:8000/api/auth/post/${id}`);
       // console.log(res);
       setPostInfo(res);
     };
@@ -50,10 +48,7 @@ const PostPage = () => {
       )}
 
       <div className="image">
-        <img
-          src={`http://localhost:8000/${postInfo.data.cover}`}
-          alt=""
-        />
+        <img src={`http://localhost:8000/${postInfo.data.cover}`} alt="" />
       </div>
       <div
         className="content"

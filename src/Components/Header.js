@@ -7,6 +7,7 @@ import axios from "axios";
 const Header = () => {
   const { setUserInfo } = useContext(UserContext);
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
   async function profile() {
     try {
@@ -16,14 +17,12 @@ const Header = () => {
       setUserInfo(res.data);
     } catch (error) {
       message.error("Internal Server Error");
-    }
+    } 
   }
 
   useEffect(() => {
     profile();
-  });
-
-  const token = localStorage.getItem("token");
+  }, []);
 
   async function handleLogout(e) {
     try {
@@ -36,7 +35,6 @@ const Header = () => {
       setUserInfo(null);
       localStorage.removeItem("token");
       localStorage.removeItem("id");
-      localStorage.removeItem("chat-user");
       navigate("/login");
     } catch (error) {
       message.error("Internal Server Error");

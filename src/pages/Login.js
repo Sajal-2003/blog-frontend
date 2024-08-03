@@ -20,6 +20,7 @@ const Login = () => {
           withCredentials: true, // Include credentials (cookies) in the request
         }
       );
+      console.log(response);
 
       if (response.request.status === 201) {
         message.success(response.data.msg);

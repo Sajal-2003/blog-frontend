@@ -16,8 +16,6 @@ const Register = () => {
         { username, password }
       );
 
-      console.log(response);
-
       if (response.request.status === 201) {
         message.success(response.data.msg);
         navigate("/login");

@@ -14,7 +14,7 @@ export default function EditPost() {
   useEffect(() => {
     const pro = async () => {
       const res = await axios.get(`http://localhost:8000/api/auth/post/${id}`);
-      console.log(res);
+      // console.log(res);
       setTitle(res.data.title);
       setContent(res.data.content);
       setSummary(res.data.summary);

@@ -1,17 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { formatISO9075 } from "date-fns";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { UserContext } from "../context/userContext";
 
 const PostPage = () => {
-  const user_id = localStorage.getItem("id");
+  const { userInfo } = useContext(UserContext);
+
   const [postInfo, setPostInfo] = useState(null);
   const { id } = useParams();
   useEffect(() => {
     const getPost = async () => {
       const res = await axios.get(`http://localhost:8000/api/auth/post/${id}`);
-      // console.log(res);
+
       setPostInfo(res);
     };
     getPost();
@@ -25,7 +27,7 @@ const PostPage = () => {
       <time>{formatISO9075(new Date(postInfo.data.createdAt))}</time>
       <div className="author">by @{postInfo.data.author.username}</div>
 
-      {user_id === postInfo.data.author._id && (
+      {userInfo._id === postInfo.data.author._id && (
         <div className="edit-row">
           <Link className="edit-btn" to={`/edit/${postInfo.data._id}`}>
             <svg

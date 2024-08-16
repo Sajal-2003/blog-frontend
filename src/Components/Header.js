@@ -5,9 +5,8 @@ import { UserContext } from "../context/userContext";
 import axios from "axios";
 
 const Header = () => {
-  const { setUserInfo } = useContext(UserContext);
+  const { userInfo, setUserInfo } = useContext(UserContext);
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
 
   async function profile() {
     try {
@@ -17,11 +16,12 @@ const Header = () => {
       setUserInfo(res.data);
     } catch (error) {
       message.error("Internal Server Error");
-    } 
+    }
   }
 
   useEffect(() => {
     profile();
+    // eslint-disable-next-line
   }, []);
 
   async function handleLogout(e) {
@@ -33,13 +33,14 @@ const Header = () => {
 
       message.success(response.data.msg);
       setUserInfo(null);
-      localStorage.removeItem("token");
-      localStorage.removeItem("id");
+
       navigate("/login");
     } catch (error) {
       message.error("Internal Server Error");
     }
   }
+
+  const username = userInfo?.username;
 
   return (
     <header>
@@ -47,13 +48,13 @@ const Header = () => {
         MyBlog
       </Link>
       <nav>
-        {token && (
+        {username && (
           <>
             <Link to="/create">Create Post</Link>
             <Link onClick={handleLogout}>Logout</Link>
           </>
         )}
-        {!token && (
+        {!username && (
           <>
             <Link to="/login">Login</Link>
             <Link to="/register">Register</Link>

@@ -13,21 +13,24 @@ const Login = () => {
   async function handleLogin(e) {
     try {
       e.preventDefault();
-      const response = await axios.post(
+      let response = await axios.post(
         "http://localhost:8000/api/auth/login",
         { username, password },
         {
           withCredentials: true, // Include credentials (cookies) in the request
         }
       );
+
       console.log(response);
 
       if (response.request.status === 201) {
         message.success(response.data.msg);
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("id", response.data.existingUser._id);
         navigate("/");
-        setUserInfo(response.existingUser);
+        const res = {
+          _id: response.data.existingUser._id,
+          username: response.data.existingUser.username,
+        };
+        setUserInfo(res);
       } else {
         message.error(response.msg);
       }

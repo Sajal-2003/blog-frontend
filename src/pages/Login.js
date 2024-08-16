@@ -27,7 +27,7 @@ const Login = () => {
         message.success(response.data.msg);
         navigate("/");
         const res = {
-          _id: response.data.existingUser._id,
+          id: response.data.existingUser._id,
           username: response.data.existingUser.username,
         };
         setUserInfo(res);

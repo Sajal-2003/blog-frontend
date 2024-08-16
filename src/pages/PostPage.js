@@ -27,7 +27,7 @@ const PostPage = () => {
       <time>{formatISO9075(new Date(postInfo.data.createdAt))}</time>
       <div className="author">by @{postInfo.data.author.username}</div>
 
-      {userInfo._id === postInfo.data.author._id && (
+      {userInfo.id === postInfo.data.author._id && (
         <div className="edit-row">
           <Link className="edit-btn" to={`/edit/${postInfo.data._id}`}>
             <svg
